@@ -40,9 +40,9 @@ public class Day5 {
 					List<String> s = ship.get(from - 1).get(number);
 					ship.get(to - 1).push(s);
 		//		}
-				for (ContainerStack c : ship) {
-					System.out.println(c);
-				}
+//				for (ContainerStack c : ship) {
+//					System.out.println(c);
+//				}
 			}
 		}
 		for (ContainerStack c : ship) {
