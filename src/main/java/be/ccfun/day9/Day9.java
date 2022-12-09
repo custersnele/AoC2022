@@ -14,31 +14,24 @@ public class Day9 {
 		List<Tile> allTiles = new ArrayList<>();
 		Tile start = new Tile(0, 0);
 		allTiles.add(start);
-		Tile headTile = start;
-		Tile tailTile = start;
-		tailTile.visit();
+		Snake snake = new Snake(start);
 		for (String line: lines) {
 			System.out.println(line);
 			String[] s = line.split(" ");
 			Direction direction = Direction.valueOf(s[0]);
 			int times = Integer.parseInt(s[1]);
 			for (int i = 0; i < times; i++) {
-				Tile prevTail = headTile;
-				headTile = headTile.getNeighbour(direction, allTiles);
-				//printTiles(allTiles, headTile, tailTile);
-				if (!headTile.touch(tailTile)) {
-					tailTile = prevTail;
-					tailTile.visit();
-				}
+				snake.move(direction, allTiles);
 			}
+			//printTiles(allTiles, snake);
 		}
-		printTiles(allTiles, headTile, tailTile);
+		printTiles(allTiles, snake);
 		System.out.println(allTiles.stream().distinct().filter(t -> t.isVisited()).count());
 
 	}
 
 
-	public static void printTiles(List<Tile> allTiles, Tile head, Tile tail) {
+	public static void printTiles(List<Tile> allTiles, Snake snake) {
 		int minRow = allTiles.stream().mapToInt(t -> t.getRow()).min().getAsInt();
 		int maxRow = allTiles.stream().mapToInt(t -> t.getRow()).max().getAsInt();
 		int minCol = allTiles.stream().mapToInt(t -> t.getCol()).min().getAsInt();
@@ -50,14 +43,12 @@ public class Day9 {
 				if (first.isEmpty()) {
 					System.out.print(".");
 				} else {
-					if (first.get().equals(head)) {
-						System.out.print("H");
-					} else if (first.get().equals(tail)) {
-						System.out.print("T");
+					if (snake.contains(first.get())) {
+						System.out.print("S");
 					} else if (first.get().isVisited()) {
 						System.out.print("#");
 					} else {
-						System.out.print("+");
+						System.out.print(".");
 					}
 				}
 			}

@@ -15,9 +15,21 @@ public class Tile {
 		this.position = position;
 	}
 
-	public Tile getNeighbour(Direction direction, List<Tile> all) {
+	public Tile move(Direction direction, List<Tile> all) {
 		int[] move = direction.move(this.position);
 		Tile nextTile = new Tile(move);
+		Tile finalNextTile = nextTile;
+		Tile existing = all.stream().filter(t -> t.equals(finalNextTile)).findFirst().orElse(null);
+		if (existing != null) {
+			nextTile = existing;
+		} else {
+			all.add(nextTile);
+		}
+		return nextTile;
+	}
+
+	public Tile move(int[] delta, List<Tile> all) {
+		Tile nextTile = new Tile(position[0] + delta[0], position[1]+ delta[1]);
 		Tile finalNextTile = nextTile;
 		Tile existing = all.stream().filter(t -> t.equals(finalNextTile)).findFirst().orElse(null);
 		if (existing != null) {
@@ -66,5 +78,13 @@ public class Tile {
 
 	public int getCol() {
 		return position[1];
+	}
+
+	@Override
+	public String toString() {
+		return "Tile{" +
+				"position=" + Arrays.toString(position) +
+				", visited=" + visited +
+				'}';
 	}
 }
