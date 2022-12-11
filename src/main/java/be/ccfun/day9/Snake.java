@@ -1,5 +1,7 @@
 package be.ccfun.day9;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +49,4 @@ public class Snake {
 	public boolean contains(Tile tile) {
 		return tiles.contains(tile);
 	}
-
 }
