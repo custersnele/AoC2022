@@ -1,6 +1,5 @@
 package be.ccfun.day11;
 
-import java.math.BigInteger;
 import java.util.function.Function;
 
 public class SelfOperation implements Function<Long, Long> {
