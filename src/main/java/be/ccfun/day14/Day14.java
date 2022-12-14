@@ -25,6 +25,13 @@ public class Day14 {
 			try {
 				new Sand(cave);
 				step++;
+				if (step % 100 == 0) {
+					System.out.println(step);
+				}
+				if (cave.isStable()) {
+					addSand = false;
+					System.out.println("Sand: " + cave.countSand());
+				}
 			} catch (CaveFullException e) {
 				System.out.println("Stopped after step " + step);
 				addSand = false;

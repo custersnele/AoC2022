@@ -2,13 +2,12 @@ package be.ccfun.day14;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Rock {
 
 	private Set<Position> allRocks = new HashSet<>();
-	private Set<Position> allSand = new HashSet<>();
-
 
 	public Rock(String description) {
 		String[] split = description.split(" -> ");
@@ -27,8 +26,8 @@ public class Rock {
 		return allRocks.contains(position);
 	}
 
-	public boolean hasSand(Position position) {
-		return allSand.contains(position);
+	public Set<Position> all() {
+		return allRocks;
 	}
 
 	public int getFromRow() {

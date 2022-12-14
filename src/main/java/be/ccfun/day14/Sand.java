@@ -26,9 +26,9 @@ public class Sand {
 		Position down = position.down();
 		Position leftDown = position.leftDown();
 		Position rightDown = position.rightDown();
-		if (cave.isOut(down)) {
-			throw new CaveFullException();
-		}
+//		if (cave.isOut(down)) {
+//			throw new CaveFullException();
+//		}
 		if (!cave.isFree(down) && !cave.isFree(leftDown) && !cave.isFree(rightDown)) {
 			// sand is still
 			cave.addSand(this);
