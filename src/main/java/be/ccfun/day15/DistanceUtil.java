@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DistanceUtil {
 
@@ -27,6 +28,28 @@ public class DistanceUtil {
 			}
 		}
 		return region;
+	}
+
+	public static Set<Position> createPossiblePositions(Position sensor, Position beacon, int min, int max) {
+		Set<Position> possiblePositions = new HashSet<>();
+		int distance = distance(sensor, beacon);
+		int y = 0;
+		for (int x = sensor.getX() - distance - 1; x <= sensor.getX(); x++) {
+			possiblePositions.add(new Position(x, sensor.getY() + y));
+			possiblePositions.add(new Position(x, sensor.getY() - y));
+			y++;
+		}
+		y = distance;
+		for (int x = sensor.getX() + 1; x <= sensor.getX() + distance + 1; x++) {
+			possiblePositions.add(new Position(x, sensor.getY() + y));
+			possiblePositions.add(new Position(x, sensor.getY() - y));
+			y--;
+		}
+		return possiblePositions.stream().filter(p -> isBetween(p.getX(), min, max) && isBetween(p.getY(), min, max)).collect(Collectors.toSet());
+	}
+
+	public static boolean isBetween(int x, int min, int max) {
+		return x >= min && x <= max;
 	}
 
 	public static Set<Position> createRegion(Position sensor, Position beacon, int only) {
