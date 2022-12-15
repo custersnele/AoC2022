@@ -34,13 +34,21 @@ public class DistanceUtil {
 		Set<Position> possiblePositions = new HashSet<>();
 		int distance = distance(sensor, beacon);
 		int y = 0;
-		for (int x = sensor.getX() - distance - 1; x <= sensor.getX(); x++) {
+		int from =  sensor.getX() - distance - 1;
+		int to = sensor.getX() + distance + 1;
+		if (to < min) {
+			return possiblePositions;
+		}
+		if (from > max) {
+			return possiblePositions;
+		}
+		for (int x = Math.max(min, from); x <= Math.min(sensor.getX(), max); x++) {
 			possiblePositions.add(new Position(x, sensor.getY() + y));
 			possiblePositions.add(new Position(x, sensor.getY() - y));
 			y++;
 		}
 		y = distance;
-		for (int x = sensor.getX() + 1; x <= sensor.getX() + distance + 1; x++) {
+		for (int x = Math.max(from, sensor.getX() + 1); x <= Math.min(to, max); x++) {
 			possiblePositions.add(new Position(x, sensor.getY() + y));
 			possiblePositions.add(new Position(x, sensor.getY() - y));
 			y--;
