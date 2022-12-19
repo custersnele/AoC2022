@@ -29,10 +29,6 @@ public class Day18 {
 					toAdd.add(candidate);
 					System.out.println(candidate);
 				}
-				if (!toAdd.contains(candidate) && candidate.isSurrounded(allPoints)) {
-					toAdd.add(candidate);
-					System.out.println(candidate);
-				}
 			}
 		}
 		allPoints.addAll(toAdd);
