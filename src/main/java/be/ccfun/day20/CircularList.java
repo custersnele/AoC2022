@@ -39,7 +39,7 @@ public class CircularList {
 		}
 		idx = translateIdx(idx);
 		Node toRemove = elements.remove(idx);
-		int newIdx = Math.floorMod(idx + toRemove.getValue(), size - 1);
+		int newIdx = Math.floorMod(idx + toRemove.getSteps(size), size - 1);
 		if (newIdx == 0) {
 			newIdx = size - 1;
 		}
@@ -50,7 +50,7 @@ public class CircularList {
 
 	}
 
-	public int getIndex(int idx) {
+	public long getIndex(int idx) {
 		idx = Math.floorMod(idx, size);
 		return elements.get(idx).getValue();
 	}
@@ -67,5 +67,11 @@ public class CircularList {
 	@Override
 	public String toString() {
 		return elements.stream().map(n -> String.valueOf(n.getValue())).collect(Collectors.joining( "," ));
+	}
+
+	public void init() {
+		for (int i = 0; i < elements.size(); i++) {
+			elements.get(i).setOriginalIdx(i);
+		}
 	}
 }

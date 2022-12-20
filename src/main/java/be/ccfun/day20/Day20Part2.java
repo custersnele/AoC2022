@@ -1,15 +1,11 @@
 package be.ccfun.day20;
 
-import be.ccfun.day18.Point3D;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class Day20 {
+public class Day20Part2 {
 
 	public static void main(String[] args) throws IOException {
 		//CircularList circularList = new CircularList("1, 2, -3, 3, -2, 0, 4");
@@ -18,10 +14,14 @@ public class Day20 {
 		for (String line : lines) {
 			circularList.add(Integer.parseInt(line));
 		}
-		for (int i = 0; i < circularList.getSize(); i++) {
-			circularList.move(i);
-			System.out.println(circularList);
+		for (int j = 0; j < 10; j++) {
+			for (int i = 0; i < circularList.getSize(); i++) {
+				circularList.move(i);
+				//System.out.println(circularList);
+			}
+			//circularList.init();
 		}
+
 		int idx = circularList.getIdxOfNumber(0);
 		long v1 = circularList.getIndex(idx + 1000);
 		System.out.println(v1);
