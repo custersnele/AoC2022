@@ -1,9 +1,14 @@
 package be.ccfun.day16;
 
+import com.google.common.graph.MutableValueGraph;
+import com.google.common.graph.ValueGraph;
+import com.google.common.graph.ValueGraphBuilder;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Day16 {
@@ -24,14 +29,24 @@ public class Day16 {
 				result.addValve(valve);
 			}
 		}
-		Valve current = getValve(allValves, "AA");
-		for (int i = 0; i < 30; i+=2) {
-			current = current.getNext();
-			System.out.println("Move to: " + current.getName());
-			current.open(i + 1);
+		MutableValueGraph<String, Integer> graph = ValueGraphBuilder.directed().build();
+		for (Valve valve : allValves) {
+			for (Valve v2 : valve.getAdjacent()) {
+				//if (v2.getRate() != 0) {
+					graph.putEdgeValue(valve.getName(), v2.getName(), 2);
+				//}
+			}
 		}
-		int sum = allValves.stream().mapToInt(v -> v.getPressure()).sum();
-		System.out.println(sum);
+		FloydWarshall.findShortestPaths(graph, true);
+//		FloydWarshallOld floydWarshall = new FloydWarshallOld(allValves);
+//		floydWarshall.print();
+//		System.out.println();
+//		for (int i = 0; i < 2; i++) {
+//			floydWarshall.execute2();
+//			floydWarshall.print();
+//			System.out.println();
+//		}
+
 	}
 
 	private static Valve getValve(List<Valve> allValves, String name) {
@@ -42,5 +57,6 @@ public class Day16 {
 		}
 		return result;
 	}
+
 
 }

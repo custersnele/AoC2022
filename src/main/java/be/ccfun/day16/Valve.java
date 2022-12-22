@@ -10,6 +10,10 @@ public class Valve implements Comparable<Valve> {
 	private boolean open;
 	private int time;
 
+	public List<Valve> getAdjacent() {
+		return adjacent;
+	}
+
 	public String getName() {
 		return name;
 	}
