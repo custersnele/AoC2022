@@ -18,5 +18,9 @@ public class Day22 {
         BoardMap boardMap = new BoardMap(lines.subList(0, lines.size() - 2));
         boardMap.executeSteps(lines.get(lines.size() - 1));
         System.out.println(boardMap.getFinalPassword());
+        System.out.println("Part 2");
+        BoardMapCube boardMapCube = new BoardMapCube(lines.subList(0, lines.size() - 2));
+        boardMapCube.executeSteps(lines.get(lines.size() - 1));
+        System.out.println(boardMapCube.getFinalPassword());
     }
 }
