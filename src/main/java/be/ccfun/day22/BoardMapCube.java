@@ -42,6 +42,7 @@ public class BoardMapCube {
     }
 
     public long getFinalPassword() {
+        System.out.println(facing.ordinal() + " " + position);
         return facing.ordinal() + 1000L * (position.getY() + 1) + 4L * (position.getX() + 1);
     }
 
@@ -194,8 +195,10 @@ public class BoardMapCube {
             System.out.println("I>" + split[i]);
             if (split[i].equals("L")) {
                 facing = facing.left();
+                System.out.println("going " + facing);
             } else if (split[i].equals("R")) {
                 facing = facing.right();
+                System.out.println("going " + facing);
             } else {
                 int number = Integer.parseInt(split[i]);
                 for (int j = 0; j < number; j++) {
